@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 // import { ContextBasket } from '../../App';
-import type { Product } from '../../types/Product';
+import type { Product } from '../../../types/Product';
 import { MantineProvider } from '@mantine/core';
 import PopupCard from './PopupCart';
 import userEvent from '@testing-library/user-event';

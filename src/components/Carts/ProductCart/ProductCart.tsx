@@ -1,12 +1,12 @@
 import { Button, Card, Flex, Group, Image, Text } from "@mantine/core";
-import basket from '../../assets/basketGreen.svg'
-import basketHover from '../../assets/basket.svg'
-import type { Product } from "../../types/Product";
-import Stepper from "../Stepper/Stepper";
+import basket from '../../../assets/basketGreen.svg'
+import basketHover from '../../../assets/basket.svg'
+import type { Product } from "../../../types/Product";
+import Stepper from "../../Stepper/Stepper";
 import { useState } from "react";
 import { useHover } from "@mantine/hooks";
-import { useTypedDispatch } from '../../hooks/redux'
-import { addToCart } from "../../store/ProductSlice";
+import { useTypedDispatch } from '../../../hooks/redux'
+import { addToCart } from "../../../store/ProductSlice";
 
 export default function ProdutCart({ id, name, price, image }: Product) {
 	const dispatch = useTypedDispatch()

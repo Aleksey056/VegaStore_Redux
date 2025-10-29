@@ -1,8 +1,8 @@
 import { Box, Divider, Flex, Group, Image, Text } from "@mantine/core";
-import clearBasket from '../../assets/cart_empty.svg'
-import Stepper from "../Stepper/Stepper";
-import { useTypedDispatch, useTypedSelector } from '../../hooks/redux'
-import { removeFromCart, addToCart } from '../../store/ProductSlice'
+import clearBasket from '../../../assets/cart_empty.svg'
+import Stepper from "../../Stepper/Stepper";
+import { useTypedDispatch, useTypedSelector } from '../../../hooks/redux'
+import { removeFromCart, addToCart } from '../../../store/ProductSlice'
 
 export default function PopupCard({ visible }: { visible: boolean }) {
 	const dispatch = useTypedDispatch()

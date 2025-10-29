@@ -1,5 +1,5 @@
 import { Image, Flex, Box, Center } from "@mantine/core";
-import loaderIcon from '../../assets/loader2.svg'
+import loaderIcon from '../../../assets/loader2.svg'
 
 export default function ProductCardLoader() {
 	return (

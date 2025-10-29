@@ -2,10 +2,10 @@ import { render, screen, within } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 // import { ContextBasket } from '../../App';
 import ProductCard from './ProductCart';
-import type { Product } from '../../types/Product';
+import type { Product } from '../../../types/Product';
 import { MantineProvider } from '@mantine/core';
 import userEvent from '@testing-library/user-event'
-import Header from '../Header/Header';
+import Header from '../../Header/Header';
 import React, { useState } from 'react';
 
 beforeEach(() => {
@@ -21,14 +21,13 @@ describe('ProductCard', () => {
 		price: 100,
 		image: 'test.jpg',
 		category: 'Category',
-		value: 1,
 	};
 
 	it('Проверка рендерится ли компонент', () => {
 		render(
 			<MantineProvider>
 				{/* <ContextBasket.Provider value={{ cart: [], setCart: () => { } }}> */}
-					<ProductCard {...product} />
+				<ProductCard {...product} />
 				{/* </ContextBasket.Provider> */}
 			</MantineProvider>
 		);
@@ -42,7 +41,7 @@ describe('ProductCard', () => {
 		render(
 			<MantineProvider>
 				{/* <ContextBasket.Provider value={{ cart: [], setCart }}> */}
-					<ProductCard {...product} />
+				<ProductCard {...product} />
 				{/* </ContextBasket.Provider> */}
 			</MantineProvider>
 		);
@@ -61,7 +60,7 @@ describe('ProductCard', () => {
 			return (
 				<MantineProvider>
 					{/* <ContextBasket.Provider value={{ cart, setCart }}> */}
-						{children}
+					{children}
 					{/* </ContextBasket.Provider> */}
 				</MantineProvider>
 			);

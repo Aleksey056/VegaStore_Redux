@@ -1,6 +1,6 @@
 import { Box, Space, Group, Center, Title, Text } from '@mantine/core'
-import ProdutCart from '../Carts/ProductCart.tsx'
-import ProductCardLoader from '../Carts/ProductCartLoader.tsx';
+import ProdutCart from '../Carts/ProductCart/ProductCart.tsx'
+import ProductCardLoader from '../Carts/ProductCartLoader/ProductCartLoader.tsx';
 import { useEffect } from 'react'
 import { fetchProducts } from '../../store/ProductSlice.ts'
 import { useTypedDispatch, useTypedSelector } from '../../hooks/redux.ts'

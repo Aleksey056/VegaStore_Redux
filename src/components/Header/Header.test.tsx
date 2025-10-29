@@ -1,7 +1,7 @@
 import { MantineProvider } from '@mantine/core';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest';
-import { ContextBasket } from '../../App';
+// import { ContextBasket } from '../../App';
 import Header from './Header';
 import userEvent from '@testing-library/user-event'
 
