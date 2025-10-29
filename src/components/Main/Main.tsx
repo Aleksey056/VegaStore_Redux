@@ -1,6 +1,6 @@
 import { Box, Space, Group, Center, Title, Text } from '@mantine/core'
-import ProdutCart from '../Cards/ProductCard.tsx'
-import ProductCardLoader from '../Cards/ProductCardLoader.tsx';
+import ProdutCart from '../Cards/ProductCart.tsx'
+import ProductCardLoader from '../Cards/ProductCartLoader.tsx';
 import { useEffect } from 'react'
 import { fetchProducts } from '../../store/ProductSlice.ts'
 import { useTypedDispatch, useTypedSelector } from '../../hooks/redux.ts'
@@ -39,10 +39,8 @@ export default function Main() {
 								)}
 						</Group>
 					</Box>
-
 				</Box>
 			</Center>
-
 		</>
 	)
 }

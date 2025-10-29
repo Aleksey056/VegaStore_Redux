@@ -1,6 +1,6 @@
 import { Box, Text, Button, Flex, Badge, Group, Center } from '@mantine/core'
 import icon from '../../assets/basket2.svg'
-import PopupCard from '../Cards/PopupCard'
+import PopupCard from '../Cards/PopupCart'
 import { ContextBasket, type ContextBasketType } from '../../App'
 import { useContext, useState } from 'react'
 

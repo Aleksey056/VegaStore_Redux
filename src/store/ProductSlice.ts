@@ -2,20 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import type { Product } from '../types/Product'
 export type CartItem = Product & { quantity: number }
 
-type ProductStateType = {
-	catalog: Product[];
-	loading: boolean;
-	error: string;
-	cart: CartItem[]
-}
-
-const initialState: ProductStateType = {
-	catalog: [],
-	loading: false,
-	error: '',
-	cart: []
-}
-
 export const fetchProducts = createAsyncThunk(
 	'products/fetchProducts',
 	async function (_, { rejectWithValue }) {
@@ -30,9 +16,22 @@ export const fetchProducts = createAsyncThunk(
 		catch (error: any) {
 			return rejectWithValue(error.message)
 		}
-
 	}
 )
+
+type ProductStateType = {
+	catalog: Product[];
+	loading: boolean;
+	error: string;
+	cart: CartItem[]
+}
+
+const initialState: ProductStateType = {
+	catalog: [],
+	loading: false,
+	error: '',
+	cart: []
+}
 
 export const ProductSlice = createSlice({
 	name: 'catalog',
@@ -40,7 +39,6 @@ export const ProductSlice = createSlice({
 	reducers: {
 		addToCart() { },
 		removeFromCart() { },
-
 	},
 	extraReducers: (builders) => {
 		builders
