@@ -1,11 +1,18 @@
-import { Box, Space, Group, Center, Title } from '@mantine/core'
-import getProductsAPI from '../../services/getProductsAPI.tsx'
+import { Box, Space, Group, Center, Title, Text } from '@mantine/core'
 import ProdutCart from '../Cards/ProductCard.tsx'
 import ProductCardLoader from '../Cards/ProductCardLoader.tsx';
+import { useEffect } from 'react'
+import { fetchProducts } from '../../store/ProductSlice.ts'
+import { useTypedDispatch, useTypedSelector } from '../../hooks/redux.ts'
 
 
 export default function Main() {
-	const { catalog, loading } = getProductsAPI()
+	const dispatch = useTypedDispatch()
+	const { catalog, loading, error } = useTypedSelector(state => state.catalog)
+
+	useEffect(() => {
+		dispatch(fetchProducts())
+	}, [])
 
 	return (
 		<>
@@ -15,6 +22,7 @@ export default function Main() {
 						<Space h={60} />
 						<Title component='h2' fz={32} fw={600}>Catalog</Title>
 						<Space h={49} />
+						{error && <Text c='red'>Ошибка: {error}</Text>}
 						<Group wrap='wrap' gap={24}>
 							{loading ?
 								Array.from({ length: 30 }).map((_, i) => < ProductCardLoader key={i} />)
