@@ -1,17 +1,16 @@
 import { Box, Divider, Flex, Group, Image, Text } from "@mantine/core";
 import clearBasket from '../../assets/cart_empty.svg'
-// import { useContext } from "react";
 import Stepper from "../Stepper/Stepper";
 import { useTypedDispatch, useTypedSelector } from '../../hooks/redux'
+import { removeFromCart, addToCart } from '../../store/ProductSlice'
 
 export default function PopupCard({ visible }: { visible: boolean }) {
-
 	const dispatch = useTypedDispatch()
 	const { cart } = useTypedSelector(state => state.catalog)
 
 	if (!visible) return null;
 
-	const allSum = cart.reduce((acc, item) => acc + item.price * item.value, 0);
+	const allSum = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
 	if (cart.length > 0) {
 		return (
@@ -38,13 +37,21 @@ export default function PopupCard({ visible }: { visible: boolean }) {
 											<Text component="h4" fw={600} fz={18}>{item.name.split(' - ')[0]}</Text>
 											<Text color="#868E96" component="span" fw={600} fz={14}>{item.name.trim().split('-')[1]}</Text>
 										</Group>
-										<Text fw={600} fz={20}>$ {item.price * item.value}</Text>
+										<Text fw={600} fz={20}>$ {item.price * item.quantity}</Text>
 									</Flex>
 								</Flex>
 								<Stepper
 									data-testid="stepper-popup"
-									value={item.value}
-									onChange={(value) => removeFromCart(item.id, value)} />
+									value={item.quantity}
+									onChange={(value) => {
+										if (value < 1) {
+											dispatch(removeFromCart(item.id))
+										} else {
+											dispatch(addToCart({ catalog: item, quantity: value - item.quantity }))
+										}
+									}
+
+									} />
 							</Flex>
 							{index !== cart.length - 1 && (
 								<Divider m={14} w={320} h={1} my={10} mr={0} ml={'auto'} />)}
