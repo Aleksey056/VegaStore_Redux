@@ -18,7 +18,6 @@ describe('PopupCard', () => {
 		price: 80,
 		image: 'test.jpg',
 		category: 'Category',
-		value: 1,
 	},
 	{
 		id: '21',
@@ -26,12 +25,11 @@ describe('PopupCard', () => {
 		price: 10,
 		image: 'test2.jpg',
 		category: 'Category',
-		value: 3,
 	}]
 	const renderPopupCard = (visible = true, cart = mockCard) => {
 		return render(
 			<MantineProvider>
-				{/* <ContextBasket.Provider value={{ cart, setCart: () => { } }}> */}
+				{/* <ContextBasket.Provider value={{ cart, setCart: () => { } }}>  */}
 				<PopupCard visible={visible} />
 				{/* </ContextBasket.Provider> */}
 			</MantineProvider>
@@ -50,9 +48,9 @@ describe('PopupCard', () => {
 			const [cart, setCart] = useState(mockCard)
 			return (
 				<MantineProvider>
-					<ContextBasket.Provider value={{ cart, setCart }}>
+					{/* <ContextBasket.Provider value={{ cart, setCart }}> */}
 						<PopupCard visible={true} />
-					</ContextBasket.Provider>
+					{/* </ContextBasket.Provider> */}
 				</MantineProvider>
 			)
 		}
@@ -75,9 +73,9 @@ describe('PopupCard', () => {
 			const [cart, setCart] = useState(mockCard)
 			return (
 				<MantineProvider>
-					<ContextBasket.Provider value={{ cart, setCart }}>
+					{/* <ContextBasket.Provider value={{ cart, setCart }}> */}
 						<PopupCard visible={true} />
-					</ContextBasket.Provider>
+					{/* </ContextBasket.Provider> */}
 				</MantineProvider>
 			)
 		}
