@@ -5,11 +5,9 @@ import App from './App.tsx'
 import { Provider } from 'react-redux'
 import { setupStore } from './store/store.ts'
 
-const store = setupStore();
-
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<Provider store={store}>
+		<Provider store={setupStore()}>
 			<App />
 		</Provider>
 	</StrictMode>

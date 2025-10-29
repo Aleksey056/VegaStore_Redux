@@ -1,24 +1,18 @@
 import { Box, Divider, Flex, Group, Image, Text } from "@mantine/core";
 import clearBasket from '../../assets/cart_empty.svg'
-import { useContext } from "react";
-import { ContextBasket, type ContextBasketType } from "../../App";
+// import { useContext } from "react";
 import Stepper from "../Stepper/Stepper";
+import { useTypedDispatch, useTypedSelector } from '../../hooks/redux'
 
 export default function PopupCard({ visible }: { visible: boolean }) {
+
+	const dispatch = useTypedDispatch()
+	const { cart } = useTypedSelector(state => state.catalog)
+
 	if (!visible) return null;
-	const { cart, setCart } = useContext(ContextBasket) as ContextBasketType
-	const removeFromCart = (id: string, value: number) => {
-		setCart(prevArr => {
-			if (value > 0) {
-				return prevArr.map(item =>
-					item.id === id ? { ...item, value } : item
-				);
-			} else {
-				return prevArr.filter(item => item.id !== id);
-			}
-		});
-	};
+
 	const allSum = cart.reduce((acc, item) => acc + item.price * item.value, 0);
+
 	if (cart.length > 0) {
 		return (
 			<>

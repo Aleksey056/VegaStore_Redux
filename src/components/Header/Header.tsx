@@ -1,11 +1,11 @@
 import { Box, Text, Button, Flex, Badge, Group, Center } from '@mantine/core'
 import icon from '../../assets/basket2.svg'
 import PopupCard from '../Cards/PopupCart'
-import { ContextBasket, type ContextBasketType } from '../../App'
-import { useContext, useState } from 'react'
+import { useTypedDispatch, useTypedSelector } from '../../hooks/redux'
+import { useState } from 'react'
 
 export default function Header() {
-	const { cart } = useContext(ContextBasket) as ContextBasketType
+	const { cart } = useTypedSelector(state => state.catalog)
 	const totalQuantity = cart.reduce((acc, item) => acc + item.value, 0);
 	const [opened, setOpened] = useState(false);
 	return (

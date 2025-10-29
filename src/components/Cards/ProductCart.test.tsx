@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { ContextBasket } from '../../App';
+// import { ContextBasket } from '../../App';
 import ProductCard from './ProductCart';
 import type { Product } from '../../types/Product';
 import { MantineProvider } from '@mantine/core';
@@ -27,9 +27,9 @@ describe('ProductCard', () => {
 	it('Проверка рендерится ли компонент', () => {
 		render(
 			<MantineProvider>
-				<ContextBasket.Provider value={{ cart: [], setCart: () => { } }}>
+				{/* <ContextBasket.Provider value={{ cart: [], setCart: () => { } }}> */}
 					<ProductCard {...product} />
-				</ContextBasket.Provider>
+				{/* </ContextBasket.Provider> */}
 			</MantineProvider>
 		);
 		expect(screen.getByText('potato')).toBeDefined();
@@ -41,9 +41,9 @@ describe('ProductCard', () => {
 	it('изменение количества при использовании степпера и стоимости', async () => {
 		render(
 			<MantineProvider>
-				<ContextBasket.Provider value={{ cart: [], setCart }}>
+				{/* <ContextBasket.Provider value={{ cart: [], setCart }}> */}
 					<ProductCard {...product} />
-				</ContextBasket.Provider>
+				{/* </ContextBasket.Provider> */}
 			</MantineProvider>
 		);
 		const stepper = screen.getByTestId('stepper')
@@ -60,9 +60,9 @@ describe('ProductCard', () => {
 			const [cart, setCart] = useState<Product[]>([]);
 			return (
 				<MantineProvider>
-					<ContextBasket.Provider value={{ cart, setCart }}>
+					{/* <ContextBasket.Provider value={{ cart, setCart }}> */}
 						{children}
-					</ContextBasket.Provider>
+					{/* </ContextBasket.Provider> */}
 				</MantineProvider>
 			);
 		};

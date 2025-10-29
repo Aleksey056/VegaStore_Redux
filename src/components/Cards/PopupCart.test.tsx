@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { ContextBasket } from '../../App';
+// import { ContextBasket } from '../../App';
 import type { Product } from '../../types/Product';
 import { MantineProvider } from '@mantine/core';
 import PopupCard from './PopupCart';
@@ -31,9 +31,9 @@ describe('PopupCard', () => {
 	const renderPopupCard = (visible = true, cart = mockCard) => {
 		return render(
 			<MantineProvider>
-				<ContextBasket.Provider value={{ cart, setCart: () => { } }}>
-					<PopupCard visible={visible} />
-				</ContextBasket.Provider>
+				{/* <ContextBasket.Provider value={{ cart, setCart: () => { } }}> */}
+				<PopupCard visible={visible} />
+				{/* </ContextBasket.Provider> */}
 			</MantineProvider>
 		)
 	}

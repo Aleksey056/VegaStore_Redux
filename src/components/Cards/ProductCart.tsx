@@ -3,33 +3,21 @@ import basket from '../../assets/basketGreen.svg'
 import basketHover from '../../assets/basket.svg'
 import type { Product } from "../../types/Product";
 import Stepper from "../Stepper/Stepper";
-import { useContext, useState } from "react";
-import { ContextBasket, type ContextBasketType } from "../../App";
+import { useState } from "react";
 import { useHover } from "@mantine/hooks";
+import { useTypedDispatch } from '../../hooks/redux'
+import { addToCart } from "../../store/ProductSlice";
 
 export default function ProdutCart({ id, name, price, image }: Product) {
-
-	const { setCart } = useContext(ContextBasket) as ContextBasketType
-
+	const dispatch = useTypedDispatch()
 	const [value, setValue] = useState(1);
-
 	const { hovered, ref } = useHover();
 
 	const handleAddPopup = () => {
-		setCart(prevArr => {
-			const index = prevArr.findIndex(item => item.id === id)
-			if (index >= 0) {
-				const update = [...prevArr]
-				update[index] = {
-					...update[index],
-					value: update[index].value + value,
-				}
-				return update
-			} else {
-				return [...prevArr, { id, name, price, image, value }];
-			}
-		})
-		setValue(1)
+		if (value > 0) {
+			dispatch(addToCart({ catalog: { id, name, price, image }, quantity: value }))
+			setValue(1)
+		}
 	}
 
 	return (

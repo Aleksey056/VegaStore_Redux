@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import type { Product } from '../types/Product'
-export type CartItem = Product & { quantity: number }
 
 export const fetchProducts = createAsyncThunk(
 	'products/fetchProducts',
@@ -18,6 +17,7 @@ export const fetchProducts = createAsyncThunk(
 		}
 	}
 )
+export type CartItem = Product & { quantity: number }
 
 type ProductStateType = {
 	catalog: Product[];
@@ -37,8 +37,24 @@ export const ProductSlice = createSlice({
 	name: 'catalog',
 	initialState,
 	reducers: {
-		addToCart() { },
-		removeFromCart() { },
+		addToCart(state, action) {
+			const { catalog, quantity } = action.payload
+			const currentElem = state.cart.filter(item => item.id === catalog.id)
+
+			if (currentElem) {
+				currentElem.quantity += quantity;
+				if (currentElem.quantity <= 0) {
+					state.cart = state.cart.filter(item => item.id !== catalog.id)
+				}
+			} else {
+				if (quantity > 0) {
+					return [...catalog, quantity];
+				}
+			}
+		},
+		removeFromCart(state, action) {
+			state.cart = state.cart.filter(item => item.id !== action.payload)
+		},
 	},
 	extraReducers: (builders) => {
 		builders

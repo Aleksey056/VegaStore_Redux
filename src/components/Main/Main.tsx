@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 import { fetchProducts } from '../../store/ProductSlice.ts'
 import { useTypedDispatch, useTypedSelector } from '../../hooks/redux.ts'
 
-
 export default function Main() {
 	const dispatch = useTypedDispatch()
 	const { catalog, loading, error } = useTypedSelector(state => state.catalog)
@@ -34,7 +33,7 @@ export default function Main() {
 									price={price}
 									image={image}
 									category={category}
-									value={1}
+								// value={1}
 								/>)
 								)}
 						</Group>
