@@ -17,7 +17,6 @@ export default function Stepper({ value, onChange }: Stepper) {
 				data-testid="stepper-image-minus"
 				disabled={value < 1}
 				onClick={() => onChange(value - 1)}>
-
 				{value < 1 ?
 					<Image src={disableMinus} />
 					: <Image src={minusButton} />}

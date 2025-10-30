@@ -1,4 +1,4 @@
-import { Box, Space, Group, Center, Title, Text } from '@mantine/core'
+import { Box, Group, Center, Title, Text } from '@mantine/core'
 import ProdutCart from '../Carts/ProductCart/ProductCart.tsx'
 import ProductCardLoader from '../Carts/ProductCartLoader/ProductCartLoader.tsx';
 import { useEffect } from 'react'
