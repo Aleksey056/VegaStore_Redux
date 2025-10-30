@@ -1,0 +1,16 @@
+.stepper {
+	gap: 0;
+}
+
+.actionIcon {
+	size: 30px;
+	border-radius: 8px;
+	background-color: #DEE2E6;
+}
+
+.value {
+	width: 30px;
+	height: 30px;
+	justify-content: center;
+	align-items: center;
+}
