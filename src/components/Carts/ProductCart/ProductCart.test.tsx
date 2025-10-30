@@ -1,18 +1,16 @@
 import { render, screen, within } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-// import { ContextBasket } from '../../App';
 import ProductCard from './ProductCart';
 import type { Product } from '../../../types/Product';
 import { MantineProvider } from '@mantine/core';
 import userEvent from '@testing-library/user-event'
 import Header from '../../Header/Header';
-import React, { useState } from 'react';
+import { setupStore } from '../../../store/store'
+import { Provider } from 'react-redux'
 
 beforeEach(() => {
 	vi.clearAllMocks();
 });
-
-const setCart = vi.fn();
 
 describe('ProductCard', () => {
 	const product: Product = {
@@ -26,9 +24,9 @@ describe('ProductCard', () => {
 	it('Проверка рендерится ли компонент', () => {
 		render(
 			<MantineProvider>
-				{/* <ContextBasket.Provider value={{ cart: [], setCart: () => { } }}> */}
-				<ProductCard {...product} />
-				{/* </ContextBasket.Provider> */}
+				<Provider store={setupStore()}>
+					<ProductCard {...product} />
+				</Provider>
 			</MantineProvider>
 		);
 		expect(screen.getByText('potato')).toBeDefined();
@@ -40,9 +38,9 @@ describe('ProductCard', () => {
 	it('изменение количества при использовании степпера и стоимости', async () => {
 		render(
 			<MantineProvider>
-				{/* <ContextBasket.Provider value={{ cart: [], setCart }}> */}
-				<ProductCard {...product} />
-				{/* </ContextBasket.Provider> */}
+				<Provider store={setupStore()}>
+					<ProductCard {...product} />
+				</Provider>
 			</MantineProvider>
 		);
 		const stepper = screen.getByTestId('stepper')
@@ -56,12 +54,11 @@ describe('ProductCard', () => {
 
 	it('Добавление в корзину при нажатии на кнопку "add to cart"', async () => {
 		const Wrapper = ({ children }: { children: React.ReactNode }) => {
-			const [cart, setCart] = useState<Product[]>([]);
 			return (
 				<MantineProvider>
-					{/* <ContextBasket.Provider value={{ cart, setCart }}> */}
-					{children}
-					{/* </ContextBasket.Provider> */}
+					<Provider store={setupStore()}>
+						{children}
+					</Provider>
 				</MantineProvider>
 			);
 		};
@@ -77,5 +74,7 @@ describe('ProductCard', () => {
 		expect(within(header).getByText('1'))
 		await userEvent.click(button)
 		expect(within(header).getByText('2'))
+		await userEvent.click(button)
+		expect(within(header).getByText('3'))
 	})
 });
