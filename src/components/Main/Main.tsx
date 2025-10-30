@@ -4,6 +4,7 @@ import ProductCardLoader from '../Carts/ProductCartLoader/ProductCartLoader.tsx'
 import { useEffect } from 'react'
 import { fetchProducts } from '../../store/ProductSlice.ts'
 import { useTypedDispatch, useTypedSelector } from '../../hooks/redux.ts'
+import styles from './Main.module.css'
 
 export default function Main() {
 	const dispatch = useTypedDispatch()
@@ -16,13 +17,11 @@ export default function Main() {
 	return (
 		<>
 			<Center>
-				<Box component='main' bg='#F3F5FA' maw={1440} mb={100} >
-					<Box ml={80} mr={80} >
-						<Space h={60} />
-						<Title component='h2' fz={32} fw={600}>Catalog</Title>
-						<Space h={49} />
-						{error && <Text c='red'>Ошибка: {error}</Text>}
-						<Group wrap='wrap' gap={24}>
+				<Box className={styles.main} component='main' >
+					<Box className={styles.box}>
+						<Title className={styles.title} component='h2'>Catalog</Title>
+						{error && <Text className={styles.title__error}>Ошибка: {error}</Text>}
+						<Group className={styles.group}>
 							{loading ?
 								Array.from({ length: 30 }).map((_, i) => < ProductCardLoader key={i} />)
 								:
@@ -32,9 +31,7 @@ export default function Main() {
 									name={name}
 									price={price}
 									image={image}
-									category={category}
-								// value={1}
-								/>)
+									category={category} />)
 								)}
 						</Group>
 					</Box>

@@ -1,0 +1,25 @@
+.main {
+	background-color: #F3F5FA;
+	max-width: 1440px;
+	margin-bottom: 100px;
+}
+
+.box {
+	margin-left: 80px;
+	margin-right: 80px;
+}
+
+.title {
+	padding-top: 120px;
+	font-size: 32px;
+	font-weight: 600;
+	padding-bottom: 49px;
+}
+
+.title__error {
+	color: red
+}
+
+.group {
+	gap: 24px;
+}
