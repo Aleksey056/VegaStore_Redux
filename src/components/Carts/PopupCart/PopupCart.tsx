@@ -3,41 +3,39 @@ import clearBasket from '../../../assets/cart_empty.svg'
 import Stepper from "../../Stepper/Stepper";
 import { useTypedDispatch, useTypedSelector } from '../../../hooks/redux'
 import { removeFromCart, addToCart } from '../../../store/ProductSlice'
+import styles from './PopupCart.module.css'
 
 export default function PopupCard({ visible }: { visible: boolean }) {
 	const dispatch = useTypedDispatch()
 	const { cart } = useTypedSelector(state => state.catalog)
+	const allSum = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
 	if (!visible) return null;
 
-	const allSum = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-	if (cart.length > 0) {
+	if (cart.length <= 0) {
 		return (
 			<>
-				<Flex
-					data-testid="popup-drop-product"
-					bg={'#FFFFFF'}
-					bdrs={16}
-					style={{ boxShadow: '0px 4px 14px rgba(0, 0, 0, 0.1)', }}
-					pos={'absolute'}
-					right={20}
-					top={71}
-					align={'center'}
-					p={24}
-					direction={'column'}
-				>
+				<Flex className={styles.isEmpty} data-testid="popup-drop-is-empty">
+					<Image className={styles.isEmpty__image} src={clearBasket} />
+					<Text className={styles.isEmpty__text}>You cart is empty!</Text>
+				</ Flex >
+			</>
+		)
+	} else {
+		return (
+			<>
+				<Flex className={styles.popup} data-testid="popup-drop-product">
 					{cart.map((item, index) => (
 						<Box key={item.id + item.price} className="card">
-							<Flex w={396} h={64} align={'center'} justify={'space-between'} >
-								<Flex gap={12}>
-									<Image w={64} h={64} src={item.image} ></Image>
-									<Flex direction={'column'}>
-										<Group gap={12} justify="space-between">
-											<Text component="h4" fw={600} fz={18}>{item.name.split(' - ')[0]}</Text>
-											<Text color="#868E96" component="span" fw={600} fz={14}>{item.name.trim().split('-')[1]}</Text>
+							<Flex className={styles.cart}>
+								<Flex className={styles.cart__gap}>
+									<Image className={styles.image} src={item.image} />
+									<Flex className={styles.column}>
+										<Group className={styles.info}>
+											<Text className={styles.info__name} component="h4" >{item.name.split(' - ')[0]}</Text>
+											<Text className={styles.info__price} component="span">{item.name.trim().split('-')[1]}</Text>
 										</Group>
-										<Text fw={600} fz={20}>$ {item.price * item.quantity}</Text>
+										<Text className={styles.sum}>$ {item.price * item.quantity}</Text>
 									</Flex>
 								</Flex>
 								<Stepper
@@ -50,44 +48,21 @@ export default function PopupCard({ visible }: { visible: boolean }) {
 											dispatch(addToCart({ catalog: item, quantity: value - item.quantity }))
 										}
 									}
-
 									} />
 							</Flex>
 							{index !== cart.length - 1 && (
-								<Divider m={14} w={320} h={1} my={10} mr={0} ml={'auto'} />)}
+								<Divider className={styles.divider} />)}
 						</Box>
 					))}
-					<Flex mt={12} pt={12} w={396} style={{ borderTop: '1px solid #DEE2E6' }} justify={'space-between'}>
-						<Text fw={600} fz={16} >
+					<Flex className={styles.total}>
+						<Text className={styles.total__text}>
 							Total
 						</Text>
-						<Text fw={600} fz={16}>
+						<Text className={styles.total__text}>
 							$ {allSum}
 						</Text>
 					</Flex>
 				</Flex >
-			</>
-		)
-	} else {
-		return (
-			<>
-				<Flex
-					data-testid="popup-drop-is-empty"
-					w={301}
-					h={227}
-					bg={'#FFFFFF'}
-					bdrs={16}
-					direction={"column"}
-					justify={'center'}
-					align={'center'}
-					style={{ boxShadow: '0px 4px 14px rgba(0, 0, 0, 0.1)', }}
-					pos={'absolute'}
-					right={20}
-					top={71}
-				>
-					<Image src={clearBasket} w={118} h={107} mb={24} />
-					<Text color="#868E96" >You cart is empty!</Text>
-				</ Flex >
 			</>
 		)
 	}
